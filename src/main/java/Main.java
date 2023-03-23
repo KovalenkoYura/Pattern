@@ -1,24 +1,25 @@
-
-import patterns.observer.obsrvr.Person;
-import patterns.observer.subject.Magazine;
+import patterns.decorator.*;
 
 public class Main {
   public static void main(String[] args) {
-    Person yura = new Person("Yura");
-    Person alex = new Person("Alex");
+    Beverage beverage = new Espresso();
+    System.out.println(beverage.getDescription() + " " + beverage.cost() + "$");
+    System.out.println("=======================");
+    Beverage beverage1 = new HouseBlend();
+    beverage1 = new Mocha(beverage1);
+    beverage1 = new Soy(beverage1);
+    beverage1 = new Whip(beverage1);
 
-    Magazine magazine = new Magazine();
-    magazine.addBook("book1");
-    magazine.addBook("book2");
-    magazine.addBook("book3");
-    magazine.addBook("book4");
+    System.out.println(beverage1.getDescription() + " " + beverage1.cost() + "$");
+    System.out.println("=======================");
 
-    magazine.addObserver(yura);
-    magazine.addObserver(alex);
+    Beverage beverage3 = new Espresso();
+    beverage3 = new Mocha(beverage3);
+    beverage3 = new Mocha(beverage3);
+    beverage3 = new Whip(beverage3);
 
-    magazine.notifyObservers();
-    magazine.removeBook("book4");
-    magazine.notifyObservers();
+    System.out.println(beverage3.getDescription() + " " + beverage3.cost() + "$");
+
   }
 }
 
